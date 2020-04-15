@@ -1,19 +1,25 @@
 import "./index.css";
 
-import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import App from "./App";
+import Directions from "./components/Directions/Directions";
+import Home from "./components/Home/Home";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import React from "react";
 import ReactDOM from "react-dom";
+import Root from "./Root.js";
+import theme from "./styles/theme";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Root>
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/directions" component={Directions} />
+        </Switch>
+      </MuiThemeProvider>
+    </BrowserRouter>
+  </Root>,
   document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
