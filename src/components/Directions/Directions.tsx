@@ -7,11 +7,15 @@ import { connect } from "react-redux";
 interface Props {
   DirectionActions: typeof DirectionActions;
   DirectionsReducer: any;
+  HomeReducer: any;
 }
 
 class Directions extends React.PureComponent<Props> {
   componentDidMount() {
-    this.props.DirectionActions.fetchDirections();
+    console.log("home", this.props.HomeReducer.get("transportType"));
+    this.props.DirectionActions.fetchDirections(
+      this.props.HomeReducer.get("transportType")
+    );
   }
   render() {
     if (this.props.DirectionsReducer) {
@@ -28,6 +32,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 
 const mapStateToProps = (state: any) => ({
   DirectionsReducer: state.DirectionsReducer,
+  HomeReducer: state.HomeReducer,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Directions);

@@ -25,9 +25,11 @@ const rp = require("request-promise");
     method: "GET",
     path: "/directions",
     handler: async (request, h) => {
-      const { profile, coordinates } = request.params;
+      const transportType = request.query["0"];
+      // const { coordinates } = request.query[1];
+      console.log("params", request.params);
       const token = process.env.MAPBOX_TOKEN;
-      const url = `https://api.mapbox.com/directions/v5/mapbox/cycling/-84.518641,39.134270;-84.512023,39.102779?access_token=${token}`;
+      const url = `https://api.mapbox.com/directions/v5/mapbox/${transportType}/-84.518641,39.134270;-84.512023,39.102779?access_token=${token}`;
       try {
         const response = await rp(url);
 

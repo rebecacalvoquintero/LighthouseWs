@@ -1,3 +1,4 @@
+import { TRANSPORT_TYPE } from "../Home/types";
 import axios from "axios";
 export const FETCH_DIRECTIONS = "FETCH_DIRECTIONS";
 export const FETCH_DIRECTIONS_SUCCESS = "FETCH_DIRECTIONS_SUCCESS";
@@ -26,10 +27,12 @@ function fetchDirectionsSuccess(directions: any) {
   };
 }
 
-export function fetchDirections() {
+export function fetchDirections(transportType: TRANSPORT_TYPE) {
+  console.log("transportType", transportType);
   return function (dispatch: any) {
     return axios({
       method: "get",
+      params: transportType,
       url: "http://localhost:8000/directions",
     }).then(
       (directions: any) => dispatch(fetchDirectionsSuccess(directions.data)),

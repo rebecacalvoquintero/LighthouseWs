@@ -1,27 +1,30 @@
 import "./Home.scss";
 
-import React, { useState } from "react";
-
 import Button from "@material-ui/core/Button";
-import { Dir } from "fs";
 import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
 import DirectionsTransitIcon from "@material-ui/icons/DirectionsTransit";
 import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import HomeActions from "./HomeActions";
 import { Link } from "react-router-dom";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { TRANSPORT_TYPE } from "./types";
 import TextField from "@material-ui/core/TextField";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
+// TODO: LOGIG
+// YOU SELECT ON THE ICONS AND SETS UP THE WAY YOU DRIVE -> STATE -> ONCLICK=> SEND IT TO THE STORE
+// FROM AND WHEERE HOW TO GET THE COORDS
 interface Props extends RouteComponentProps {
   HomeActions: typeof HomeActions;
 }
 interface State {
   from: string;
   to: string;
+  transportType: TRANSPORT_TYPE;
 }
 
 class Home extends React.PureComponent<Props, State> {
@@ -31,6 +34,7 @@ class Home extends React.PureComponent<Props, State> {
     this.state = {
       from: "",
       to: "",
+      transportType: TRANSPORT_TYPE.DRIVING,
     };
   }
 
@@ -38,8 +42,15 @@ class Home extends React.PureComponent<Props, State> {
 
   onWhereToChange = (value: string) => this.setState({ to: value });
 
+  onTransportTypeSelect = (transport: TRANSPORT_TYPE) =>
+    this.setState({ transportType: transport });
+
   handleSubmit = () => {
-    this.props.HomeActions.saveFromAndTo(this.state.from, this.state.to);
+    this.props.HomeActions.saveFromAndTo(
+      this.state.from,
+      this.state.to,
+      this.state.transportType
+    );
   };
 
   render() {
@@ -64,10 +75,18 @@ class Home extends React.PureComponent<Props, State> {
           />
         </div>
         <div className="form-directions-icons">
-          <DriveEtaIcon />
-          <DirectionsTransitIcon />
-          <DirectionsWalkIcon />
-          <DirectionsBikeIcon />
+          <DriveEtaIcon
+            onClick={() => this.onTransportTypeSelect(TRANSPORT_TYPE.DRIVING)}
+          />
+          <DirectionsTransitIcon
+            onClick={() => this.onTransportTypeSelect(TRANSPORT_TYPE.DRIVING)}
+          />
+          <DirectionsWalkIcon
+            onClick={() => this.onTransportTypeSelect(TRANSPORT_TYPE.WALKING)}
+          />
+          <DirectionsBikeIcon
+            onClick={() => this.onTransportTypeSelect(TRANSPORT_TYPE.CYCLING)}
+          />
         </div>
         <div className="form-button">
           <Link to="/directions">
