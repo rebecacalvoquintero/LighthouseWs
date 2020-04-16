@@ -3,6 +3,7 @@ const Hapi = require("@hapi/hapi");
 const Inert = require("@hapi/inert");
 const Vision = require("@hapi/vision");
 const HapiSwagger = require("hapi-swagger");
+const rp = require("request-promise");
 
 (async () => {
   const server = await new Hapi.Server({
@@ -23,18 +24,16 @@ const HapiSwagger = require("hapi-swagger");
     handler: async (request, h) => {
       const { profile, coordinates } = request.params;
       const token = process.env.MAPBOX_TOKEN;
-      const url = `https://api.mapbox.com/directions/v5/mapbox${profile}/${coordinates}?access_token=${token}`;
-      // return
-      // const url = `https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&key=${process.env.API_KEY}`;
-      // try {
-      //   // const response = await rp(url);
-      //   const response = directionsResultObject;
-      //   console.log(response);
+      const url = `https://api.mapbox.com/directions/v5/mapbox/cycling/-84.518641,39.134270;-84.512023,39.102779?access_token=${token}`;
+      try {
+        const response = await rp(url);
 
-      //   return response;
-      // } catch (error) {
-      //   console.log("error ", error);
-      // }
+        console.log("response", response);
+
+        return response;
+      } catch (error) {
+        console.log("error ", error);
+      }
     },
     options: {
       description: "Directions api",
