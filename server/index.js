@@ -9,6 +9,9 @@ const rp = require("request-promise");
   const server = await new Hapi.Server({
     host: "localhost",
     port: 8000,
+    routes: {
+      cors: true,
+    },
   });
 
   const swaggerOptions = {

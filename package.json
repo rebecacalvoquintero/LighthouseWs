@@ -61,6 +61,7 @@
     "dotenv": "^8.2.0",
     "hapi-swagger": "^13.0.0",
     "immutable": "^4.0.0-rc.12",
+    "node-sass": "^4.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "redux-devtools": "^3.5.0",

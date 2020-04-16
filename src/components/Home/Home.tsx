@@ -1,6 +1,13 @@
+import "./Home.scss";
+
 import React, { useState } from "react";
 
 import Button from "@material-ui/core/Button";
+import { Dir } from "fs";
+import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
+import DirectionsTransitIcon from "@material-ui/icons/DirectionsTransit";
+import DirectionsWalkIcon from "@material-ui/icons/DirectionsWalk";
+import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import HomeActions from "./HomeActions";
 import { Link } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
@@ -37,31 +44,44 @@ class Home extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <form noValidate autoComplete="off">
-        <TextField
-          id="filled-basic"
-          label="Where from?"
-          variant="filled"
-          onChange={(event) =>
-            this.onWhereFromChange(event.currentTarget.value)
-          }
-        />
-        <TextField
-          id="filled-basic"
-          label="Where to?"
-          variant="filled"
-          onChange={(event) => this.onWhereToChange(event.currentTarget.value)}
-        />
-        <Link to="/directions">
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            onClick={this.handleSubmit}
-          >
-            Go!
-          </Button>
-        </Link>
+      <form noValidate autoComplete="off" className="form">
+        <div className="form-directions-text-fields">
+          <TextField
+            id="filled-basic"
+            label="Where from?"
+            variant="filled"
+            onChange={(event) =>
+              this.onWhereFromChange(event.currentTarget.value)
+            }
+          />
+          <TextField
+            id="filled-basic"
+            label="Where to?"
+            variant="filled"
+            onChange={(event) =>
+              this.onWhereToChange(event.currentTarget.value)
+            }
+          />
+        </div>
+        <div className="form-directions-icons">
+          <DriveEtaIcon />
+          <DirectionsTransitIcon />
+          <DirectionsWalkIcon />
+          <DirectionsBikeIcon />
+        </div>
+        <div className="form-button">
+          <Link to="/directions">
+            <Button
+              variant="contained"
+              size="large"
+              color="primary"
+              type="submit"
+              onClick={this.handleSubmit}
+            >
+              Go!
+            </Button>
+          </Link>
+        </div>
       </form>
     );
   }
