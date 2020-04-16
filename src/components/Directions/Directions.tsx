@@ -4,31 +4,20 @@ import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-// before it renders the page it should call the endpoint directions
-// wait for the response
-// populate the store with the response
-
 interface Props {
   DirectionActions: typeof DirectionActions;
-}
-interface State {
-  directions: JSON;
+  DirectionsReducer: any;
 }
 
-class Directions extends React.PureComponent<Props, State> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      directions: JSON.parse(""),
-    };
-  }
-
+class Directions extends React.PureComponent<Props> {
   componentDidMount() {
-    // call the endpoint directions
-    // DirectionActions.fetchDirections();
+    this.props.DirectionActions.fetchDirections();
   }
   render() {
+    if (this.props.DirectionsReducer) {
+      console.log("directions", this.props.DirectionsReducer.get("directions"));
+    }
+
     return <div>Hello</div>;
   }
 }
@@ -37,4 +26,8 @@ const mapDispatchToProps = (dispatch: any) => ({
   DirectionActions: bindActionCreators(DirectionActions, dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(Directions);
+const mapStateToProps = (state: any) => ({
+  DirectionsReducer: state.DirectionsReducer,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Directions);

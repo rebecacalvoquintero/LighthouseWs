@@ -1,0 +1,34 @@
+{
+  "routes": [
+    {
+      "geometry": "kkzmFtozbOz@O~@lCYxEr^bB|B~AnRbAHgDpKl@LoCtJlBpBaF|]{c@rB`Dh@o@v@n@hgA{PFz@",
+      "legs": [
+        {
+          "summary": "",
+          "weight": 1365.2,
+          "duration": 1171.1,
+          "steps": [],
+          "distance": 4169.6
+        }
+      ],
+      "weight_name": "cyclability",
+      "weight": 1365.2,
+      "duration": 1171.1,
+      "distance": 4169.6
+    }
+  ],
+  "waypoints": [
+    {
+      "distance": 18.839114182243243,
+      "name": "",
+      "location": [-84.518509, 39.134135]
+    },
+    {
+      "distance": 15.959786826422654,
+      "name": "East 6th Street",
+      "location": [-84.511987, 39.102638]
+    }
+  ],
+  "code": "Ok",
+  "uuid": "Zahj6_0zMGar-RWSd3MukeAru9VIVgN6_NZEi2xyGdjvQA4QrgZUCg=="
+}

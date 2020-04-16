@@ -7,13 +7,13 @@ import HomeReducer from "./components/Home/HomeReducer";
 import { Provider } from "react-redux";
 import React from "react";
 import { createStore } from "redux";
-import reduxPromise from "redux-promise";
+import thunk from "redux-thunk";
 
 export default ({ children, initialState = {} }) => {
   const store = createStore(
-    combineReducers({ directions: DirectionsReducer, HomeReducer }),
+    combineReducers({ DirectionsReducer, HomeReducer }),
     initialState,
-    applyMiddleware(reduxPromise)
+    applyMiddleware(thunk)
   );
 
   return <Provider store={store}>{children} </Provider>;

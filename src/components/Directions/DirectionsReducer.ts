@@ -1,12 +1,15 @@
-import { FETCH_DIRECTIONS, FETCH_DIRECTIONS_ERROR } from "./DirectionsActions";
+import { RECEIVE_DIRECTIONS } from "./DirectionsActions";
+import { fromJS } from "immutable";
 
-import { Action } from "redux";
+const initialState = fromJS({
+  directions: null,
+});
 
-export default function (state = [], action: any) {
+export default function DirectionsReducer(state = initialState, action: any) {
   switch (action.type) {
-    case FETCH_DIRECTIONS:
-      const directions = action.payload.data;
-      return [...state, ...directions];
+    case RECEIVE_DIRECTIONS:
+      console.log("directions reducers", action.directions);
+      return state.set("directions", action.directions);
 
     default:
       return state;
